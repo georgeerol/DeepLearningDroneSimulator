@@ -87,7 +87,7 @@ def fcn_model(inputs, num_classes):
 
 ```
 
-### What is a Fully Convolgitutional Networks?
+### What is a Fully Convolutional Network?
 
 A typical convolutional neural network might consist of a series of convolution layers.
 Followed by  fully connected layers and ultimately a soft max activation function.
@@ -123,7 +123,7 @@ information from multiple resolution scales. As a result the network is able to 
 #### Skip Connection
 ![Skip Connection](./misc/SkipConnection.png)
 
-### Structurally an FNC
+### Structurally a FNC
 Structurally an FCN is usually comprised of two parts: encoder and decoder.
 * The encoder is a series of convolutional layers like VGG and ResNet.
 The goal of the encoder is to extract features from the image.
@@ -155,6 +155,25 @@ def decoder_block(small_ip_layer, large_ip_layer, filters):
     return output_layer
 ```
 
+### Hyperparameters
+The Hyperparameters use in this project is:
+```
+learning_rate = 0.01
+batch_size = 15
+num_epochs = 60
+steps_per_epoch = 200
+validation_steps = 50
+workers = 2
+```
+
+* learning_rate: Started at 0.01 and the network had no problem with that value
+* batch_size: is  the number of training samples/images that get propagated through the network in a single pass. It is set to 15 because one of the 2 Nvidia GTX 1070 kept crashing because of low memory
+* num_epochs: number of times the entire training dataset gets propagated through the network. This value is set to 60.
+* steps_per_epoch: number of batches of training images that go through the network in 1 epoch.This value is set to 200.
+* validation_steps: number of batches of validation images that go through the network in 1 epoch. This is similar to steps_per_epoch, except validation_steps is for the validation dataset. This value is set to 50.
+* workers: maximum number of processes to spin up. This can affect your training speed and is dependent on your hardware. This value is set to 2.
+
+With 2 NVDIA GTX 1070 with 8GB RAM and the hyperparameters settings above, it took almost 3 hours to train the model.
 
 **Note**: See the model_training Jupyter Notebook located in the [code folder](./code) or the html page located in the
 [html folder](./html) for more information about the implementation of the Segmentation Network.
@@ -376,3 +395,8 @@ $ python follower.py my_amazing_model.h5
 ```
 
 **Note:** If you'd like to see an overlay of the detected region on each camera frame from the drone, simply pass the `--pred_viz` parameter to `follower.py`
+
+## Enhancements
+* More data images can be added to the training to improve the learning and descrease ofer fitting
+* The performance of the FCN can still can improve by add more layers and larger filter sizes.
+* For the training to me faster, we can add more GPUs
