@@ -68,13 +68,134 @@ To interface your neural net with the QuadSim simulator, you must use a version 
 The simulator binary can be downloaded [here](https://github.com/udacity/RoboND-DeepLearning/releases/latest)
 
 ## Implement the Segmentation Network
-1. Download the training dataset from above and extract to the project `data` directory.
-2. Implement your solution in model_training.ipynb
-3. Train the network locally, or on [AWS](https://classroom.udacity.com/nanodegrees/nd209/parts/09664d24-bdec-4e64-897a-d0f55e177f09/modules/cac27683-d5f4-40b4-82ce-d708de8f5373/lessons/197a058e-44f6-47df-8229-0ce633e0a2d0/concepts/27c73209-5d7b-4284-8315-c0e07a7cd87f?contentVersion=1.0.0&contentLocale=en-us).
-4. Continue to experiment with the training data and network until you attain the score you desire.
-5. Once you are comfortable with performance on the training dataset, see how it performs in live simulation!
+
+### Semantic Segmentation
+Semantic Segmentation is the task of assigning meaning to part of an object.
+This can be done at the pixel level where we assign each pixel to a
+target class such as road, car, pedestrian, sign, or any number
+of other classes. Semantic segmentation help us derive valuable information
+about every pixel in the image rather than just slicing sections into bounding boxes.
+This is a filed known as scene understanding and it's particularly relevant to autonomous vehicle.
+Full scene understanding help with perception, which enables vehicles to make decisions.
+
+ ![Semantic Segmentation](./misc/SemanticSegmentation.png)
+
+
+### Bounding Boxes
+They are a simple method of scene understanding compared to segmentation.
+In neural  network, just has to figure out where an object is and draw a type box around it.
+There are already great open source state of the art solution, such as YOLO and SSD models.
+These models perform extremely well event at high frame per second.
+They're useful for detecting different object such as cars, people, traffic lights, and other objects in the scene.
+
+ ![Semantic Segmentation](./misc/BoundingBoxesWorking.png)
+However, burning boxes have their limits. Imagine drawing and bounding
+box around a curvy road, the forest, or the sky, this quickly becomes problematic
+ or even impossible to convey the true shape of an object. At best, bounding boxes
+ can only hope to  achieve partial seen understanding which is why we use Semantic Segmentation in this project.
+
+  ![Semantic Segmentation](./misc/BoundingBoxesNotWorking.png)
+
+A fully convolution network(FCN) is used to train the Semantic Segmentation model.
+ It contains 3 encoder blocks, a 1x1 convolution layer, and 3 symmetrical decoder blocks.
+
+
+ ###### Fully Convolutional network code snippet
+
 
 ## Collecting Training Data ##
+```python
+
+def fcn_model(inputs, num_classes):
+
+    # Add Encoder Blocks.
+    filter = 96
+    encoder_one = encoder_block(inputs,filter,2)
+    encoder_two = encoder_block(encoder_one,filter *2, 2)
+    encoder_three = encoder_block(encoder_two,filter*4,2)
+
+    # Add 1x1 Convolution layer using conv2d_batchnorm().
+    one_to_one_convolution = conv2d_batchnorm(encoder_three,filter*4,kernel_size=1,strides =1)
+
+    # Add the same number of Decoder Blocks as the number of Encoder Blocks
+    decoder_three = decoder_block(one_to_one_convolution,encoder_two,filter *4)
+    decoder_two = decoder_block(decoder_three,encoder_one,filter *2)
+    decoder_one = decoder_block(decoder_two,inputs,filter)
+
+
+    # The function returns the output layer of the model. decoder_one is the final layer obtained from the last decoder_block()
+    return layers.Conv2D(num_classes, 3, activation='softmax', padding='same')(decoder_one)
+
+```
+
+### What is a Fully Convolutional Networks?
+
+A typical convolutional neural network might consist of a series of convolution layers.
+Followed by  fully connected layers and ultimately a soft max activation function.
+It s a great architecture for a classification task like  this a picture of a hotdog ?
+
+  ![Semantic Segmentation](./misc/ConvolutionalNeuralNetwork.png)
+
+But what if we want to change our task ever so slighty. We want to answer
+the question, where in this pictute is the hotdog?The question is much more
+difficult to answer since fully connected layers don't preserve spatial information.
+However if, we change the  C from connected to convolutional, we can
+integrate convolutions directly into the layer to create fully convolutional network.
+It help us answer where is the hotdog question because while doing the
+convolution they preserve the spatial information throughout the entire network.
+Additionally,  since convolutional operations fundamentally don't care about the size of the input,
+a fully convolutional network will work on images of any size.
+
+
+![Semantic Segmentation](./misc/FullyConvolutionalNetwork.png)
+
+Fully Convolutional Networks have  achieved state of the art results in
+computer vision tasks such as Semantic Segmentation.
+FCNs take advantage of 3 special techniques
+
+1. Replace fully connected layers with 1x1 convolutional layers
+2. Up-sampling through the use of transposed convolutional layers
+2. Skip Connection - These skip connection allow the network to  use
+information from multiple resolution scales. As a result the network is able to make more precise segmentation decisions.
+
+#### No Skip Connection
+![No Skip Connection](./misc/NoSkipConnection.png)
+
+#### Skip Connection
+![Skip Connection](./misc/SkipConnection.png)
+
+Structurally an FCN is usually comprised of two parts: encoder and decoder.
+* The encoder is a series of convolutional layers like VGG and ResNet.
+The goal of the encoder is to extract features from the image.
+* The decoder up-scale the output of the encoder such that it's the same
+size as the original image. Thus, it results in segmentation or prediction
+of each individual pixel in the original image.
+
+###### Encoder code snippet
+```python
+def encoder_block(input_layer, filters, strides):
+
+    # Create a separable convolution layer using the separable_conv2d_batchnorm() function.
+    output_layer = separable_conv2d_batchnorm(input_layer, filters, strides)
+    return output_layer
+```
+
+
+
+###### Decoder code snippet
+```python
+def decoder_block(small_ip_layer, large_ip_layer, filters):
+
+    # Upsample the small input layer using the bilinear_upsample() function.
+    upsample = bilinear_upsample(small_ip_layer)
+    # Concatenate the upsampled and large input layers using layers.concatenate
+    concatenate_upsample = layers.concatenate([upsample,large_ip_layer])
+    # Add some number of separable convolution layers
+    output_layer = separable_conv2d_batchnorm(concatenate_upsample,filters,1)
+    output_layer = separable_conv2d_batchnorm(output_layer,filters,1)
+    return output_layer
+```
+
 A simple training dataset has been provided in this project's repository. This dataset will allow you to verify that your segmentation network is semi-functional. However, if your interested in improving your score,you may want to collect additional training data. To do it, please see the following steps.
 
 The data directory is organized as follows:
