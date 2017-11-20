@@ -1,19 +1,57 @@
-[![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
 
-## Deep Learning Drone Simulor ##
-
-In this project, you will train a deep neural network to identify and track a target in simulation. So-called “follow me” applications like this are key to many fields of robotics and the very same techniques you apply here could be extended to scenarios like advanced cruise control in autonomous vehicles or human-robot collaboration in industry.
-
+## Deep Learning Drone Simulator ##
 [image_0]: ./misc/FollowMeGif.gif
 ![alt text][image_0] 
 
-## Setup Instructions
-**Clone the repository**
-```
-$ git clone https://github.com/udacity/RoboND-DeepLearning.git
-```
+This [Udacity clone project](https://github.com/udacity/RoboND-DeepLearning.git)  is to  learn  how to build a neural network
+ and how all the individual pieces function together to form a powerful decision-making  drone machine.
 
-**Download the data**
+**TensorFlow**  which  is a powerful software framework developed by Google to facilitate building deep neural networks is 
+used to abstract away many of the  finer details and make life easier are used in this project. However it is important 
+to have a firm grasp of the fundamentals to understand  the choices needed to make in setting various parameters or 
+how to improve the performance of the neural network.
+
+
+### What is Deep learning and what it is used for?
+The heart of deep learning has to do with something call Neural Networks. Neural networks vaguely mimic the process of 
+how the brain operates with neurons  that fire bits of information. 
+For example,There's a child playing in the sand with some read an blue shells and we ask the child.
+ Can you draw a line that separates the red and the blue shells? And the child will draws a line. 
+
+![Child Draw line](./misc/ChildDrawLine.JPG)
+ 
+ That's it. That's what a neural networks does. Given some data in the form of blue or red points, the neural network will look for the best line that separates them.
+  And if the data is a bit more complicated  then we'll need a more complicated algorithm. Here, a deep neural network will do the job and find the more complex boundary that separates the points.
+
+![Simple Data Points](./misc/SimpleDataPoints.JPG)
+
+If the data is a bit more complicated  then we'll need a more complicated algorithm. Here, a deep neural network will do the job and find the more complex boundary that separates the points.
+
+![Complicated Data Points](./misc/ComplicatedDataPoints.JPG)
+
+## Setup Instructions
+### Prerequisites
+Python 3.5 and Jupyter Notebooks is needed for this project.  The best way to get setup with these is to use Anaconda, the [RoboND-Python-Starterkit](https://github.com/ryan-keenan/RoboND-Python-Starterkit) and use [PyCharm IDE](https://www.jetbrains.com/pycharm/) for coding and debugging.
+Here is a great link for learning more about [Anaconda and Jupyter Notebooks](https://classroom.udacity.com/courses/ud1111)
+
+Note: if you have a recent version of the RoboND environment then these packages should already be installed.
+
+#### OS X and Linux (Ubuntu)source activate RoboND
+pip install tensorflow==1.2.1
+pip install socketIO-client
+pip install transforms3d
+pip install PyQt5
+pip install pyqtgraph
+
+#### Windows source activate RoboND 
+# if the above throws an error, you can run "activate RoboND" instead
+* pip install tensorflow==1.2.1
+* pip install socketIO-client
+* pip install transforms3d
+* pip install PyQt5
+* pip install pyqtgraph
+
+### Download the data
 
 Save the following three files into the data folder of the cloned repository. 
 
@@ -23,29 +61,11 @@ Save the following three files into the data folder of the cloned repository.
 
 [Sample Evaluation Data](https://s3-us-west-1.amazonaws.com/udacity-robotics/Deep+Learning+Data/Project/sample_evaluation_data.zip)
 
-**Download the QuadSim binary**
+### Download the QuadSim binary
 
 To interface your neural net with the QuadSim simulator, you must use a version QuadSim that has been custom tailored for this project. The previous version that you might have used for the Controls lab will not work.
 
 The simulator binary can be downloaded [here](https://github.com/udacity/RoboND-DeepLearning/releases/latest)
-
-**Install Dependencies**
-
-You'll need Python 3 and Jupyter Notebooks installed to do this project.  The best way to get setup with these if you are not already is to use Anaconda following along with the [RoboND-Python-Starterkit](https://github.com/udacity/RoboND-Python-StarterKit).
-
-If for some reason you choose not to use Anaconda, you must install the following frameworks and packages on your system:
-* Python 3.x
-* Tensorflow 1.2.1
-* NumPy 1.11
-* SciPy 0.17.0
-* eventlet 
-* Flask
-* h5py
-* PIL
-* python-socketio
-* scikit-image
-* transforms3d
-* PyQt4/Pyqt5
 
 ## Implement the Segmentation Network
 1. Download the training dataset from above and extract to the project `data` directory.
