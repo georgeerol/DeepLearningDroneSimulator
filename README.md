@@ -63,9 +63,6 @@ A fully convolution network(FCN) is used to train the Semantic Segmentation mode
 
 
  ###### Fully Convolutional network code snippet
-
-
-## Collecting Training Data ##
 ```python
 
 def fcn_model(inputs, num_classes):
