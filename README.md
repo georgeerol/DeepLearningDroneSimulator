@@ -18,13 +18,13 @@ For example,There's a child playing in the sand with some read an blue shells an
  Can you draw a line that separates the red and the blue shells? And the child will draw a line. 
 
 ![Child Draw line](./misc/ChildDrawLine.JPG)
- 
- That's it. That's what a neural network does. Given some data in the form of blue or red points, the neural network will look for the best line that separates them.
-  And if the data is a bit more complicated then we'll need a more complicated algorithm. Here, a deep neural network will do the job and find the more complex boundary that separates the points.
+
+That's what a neural network does. Given some data in the form of blue or red points, the neural network will look for the best line that separates them.
+And if the data is a bit more complicated then we'll need a more complicated algorithm. Here, a deep neural network will do the job and find the more complex boundary that separates the points.
 
 ![Simple Data Points](./misc/SimpleDataPoints.JPG)
 
-If the data is a bit more complicated,  then we'll need a more complicated algorithm. Here, a deep neural network will do the job and find the more complex boundary that separates the points.
+If the data is a bit more complicated, then we'll need a more complicated algorithm. Here, a deep neural network will do the job and find the more complex boundary that separates the points.
 
 ![Complicated Data Points](./misc/ComplicatedDataPoints.JPG)
 
@@ -36,7 +36,7 @@ This can be done at the pixel level where we assign each pixel to a
 target class such as road, car, pedestrian, sign, or any number
 of other classes. Semantic segmentation helps us derive valuable information
 about every pixel in the image rather than just slicing sections into bounding boxes.
-This is a filed known as scene understanding, and it's mainly relevant to autonomous vehicle.
+This is a field known as scene understanding, and it's mainly relevant to autonomous vehicle.
 Full scene understanding help with perception, which enables vehicles to make decisions.
 
  ![Semantic Segmentation](./misc/SemanticSegmentation.png)
@@ -44,21 +44,21 @@ Full scene understanding help with perception, which enables vehicles to make de
 
 ### Bounding Boxes
 They are a simple method of scene understanding compared to segmentation.
-In neural network, just has to figure out where an object is and draw a type box around it.
-There are already significant open source state of the art solution, such as YOLO and SSD models.
+In neural network, just has to figure out, where an object is and draw a type box around it.
+There are already significant open source state of the art solution, such as **YOLO** and **SSD** models.
 These models perform extremely well even at a high frame per second.
 They're useful for detecting different objects such as cars, people, traffic lights, and other objects in the scene.
 
  ![Semantic Segmentation](./misc/BoundingBoxesWorking.png)
-However, burning boxes have their limits. Imagine drawing and bounding
+However, bounding boxes have their limits. Imagine drawing and bounding
 box around a curvy road, the forest, or the sky; this quickly becomes problematic
  or even impossible to convey the true shape of an object. At best, bounding boxes
- can only hope to achieve partial seen understanding which is why we use Semantic Segmentation in this project.
+ can only hope to achieve partial seen understanding which is why we use semantic segmentation in this project.
 
   ![Semantic Segmentation](./misc/BoundingBoxesNotWorking.png)
 
-A full convolution network(FCN) is used to train the Semantic Segmentation model.
- It contains three encoder blocks, a 1x1 convolution layer, and three symmetrical decoder blocks.
+A full convolution network(FCN) is used to train the semantic segmentation model.
+It contains three encoder blocks, a 1x1 convolution layer, and three symmetrical decoder blocks.
 
 
  ###### Fully Convolutional network code snippet
@@ -90,12 +90,11 @@ def fcn_model(inputs, num_classes):
 
 A typical convolutional neural network might consist of a series of convolution layers.
 Followed by fully connected layers and ultimately a softmax activation function.
-It's a great architecture for a classification task like this a picture of a hotdog?
+It's a great architecture for a classification task/ For example is this a picture of a hotdog?
 
   ![Semantic Segmentation](./misc/ConvolutionalNeuralNetwork.png)
 
-But what if we want to change our task ever so slighty. We want to answer
-the question, where in this picture is the hotdog?The question is much more
+But question we want to answer is where in a picture is the hotdog? The question is much more
 difficult to solve since fully connected layers don't preserve spatial information.
 However if, we change the  C from connected to convolutional, we can
 integrate convolutions directly into the layer to create fully convolutional network.
@@ -108,7 +107,7 @@ a fully convolutional network will work on images of any size.
 ![Semantic Segmentation](./misc/FullyConvolutionalNetwork.png)
 
 Fully Convolutional Networks have  achieved state of the art results in
-computer vision tasks such as Semantic Segmentation.
+computer vision tasks such as semantic segmentation.
 FCNs take advantage of 3 special techniques:
 
 1. Replace fully connected layers with 1x1 convolutional layers
@@ -124,7 +123,7 @@ information from multiple resolution scales. As a result, the network is able to
 
 ### Structurally a FNC
 Structurally an FCN is usually comprised of two parts: encoder and decoder.
-* The encoder is a series of convolutional layers like VGG and ResNet.
+* The encoder is a series of convolutional layers like **VGG** and **ResNet**.
 The goal of the encoder is to extract features from the image.
 * The decoder up-scale the output of the encoder such that it's the same
 size as the original image. Thus, it results in segmentation or prediction
@@ -175,7 +174,7 @@ workers = 2
 With 2 NVDIA GTX 1070 with 8GB RAM and the hyperparameters settings above, it took almost 3 hours to train the model.
 
 **Note**: See the model_training Jupyter Notebook located in the [code folder](./code) or the html page located in the
-[html folder](./html) for more information about the implementation of the Segmentation Network.
+[html folder](./html) for more information about the implementation of the segmentation network.
 
 
 ## Setup Instructions
@@ -345,23 +344,7 @@ Merging multiple `train` or `validation` may be difficult, it is recommended tha
 ## Training, Predicting and Scoring ##
 With your training and validation data having been generated or downloaded from the above section of this repository, you are free to begin working with the neural net.
 
-**Note**: Training CNNs is a very compute-intensive process. If your system does not have a recent Nvidia graphics card, with [cuDNN](https://developer.nvidia.com/cudnn) and [CUDA](https://developer.nvidia.com/cuda) installed , you may need to perform the training step in the cloud. Instructions for using AWS to train your network in the cloud may be found [here](https://classroom.udacity.com/nanodegrees/nd209/parts/09664d24-bdec-4e64-897a-d0f55e177f09/modules/cac27683-d5f4-40b4-82ce-d708de8f5373/lessons/197a058e-44f6-47df-8229-0ce633e0a2d0/concepts/27c73209-5d7b-4284-8315-c0e07a7cd87f?contentVersion=1.0.0&contentLocale=en-us)
-
-### Training your Model ###
-**Prerequisites**
-- Training data is in `data` directory
-- Validation data is in the `data` directory
-- The folders `data/train/images/`, `data/train/masks/`, `data/validation/images/`, and `data/validation/masks/` should exist and contain the appropriate data
-
-To train complete the network definition in the `model_training.ipynb` notebook and then run the training cell with appropriate hyperparameters selected.
-
-After the training run has completed, your model will be stored in the `data/weights` directory as an [HDF5](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) file, and a configuration_weights file. As long as they are both in the same location, things should work. 
-
-**Important Note** the *validation* directory is used to store data that will be used during training to produce the plots of the loss, and help determine when the network is overfitting your data. 
-
-The **sample_evalution_data** directory contains data specifically designed to test the networks performance on the FollowME task. In sample_evaluation data are three directories each generated using a different sampling method. The structure of these directories is exactly the same as `validation`, and `train` datasets provided to you. For instance `patrol_with_targ` contains an `images` and `masks` subdirectory. If you would like to the evaluation code on your `validation` data a copy of the it should be moved into `sample_evaluation_data`, and then the appropriate arguments changed to the function calls in the `model_training.ipynb` notebook.
-
-The notebook has examples of how to evaulate your model once you finish training. Think about the sourcing methods, and how the information provided in the evaluation sections relates to the final score. Then try things out that seem like they may work. 
+**Note**: Training CNNs is a very compute-intensive process. If your system does not have a recent Nvidia graphics card, with [cuDNN](https://developer.nvidia.com/cudnn) and [CUDA](https://developer.nvidia.com/cuda) installed , you may need to perform the training step in a AWS cloud.
 
 ## Scoring ##
 
@@ -372,6 +355,9 @@ In addition to this we determine whether the network detected the target person 
 We determine whether the target is actually in the image by whether there are more then 3 pixels containing the target in the label mask. 
 
 Using the above the number of detection true_positives, false positives, false negatives are counted. 
+
+**Note**: See the model_training Jupyter Notebook located in the [code folder](./code) or the html page located in the
+[html folder](./html) for more information and to see the Score.
 
 **How the Final score is Calculated**
 
@@ -386,11 +372,11 @@ Collect more data from the sim. Look at the predictions think about what the net
 Share your scores in slack, and keep a tally in a pinned message. Scores should be computed on the sample_evaluation_data. This is for fun, your grade will be determined on unreleased data. If you use the sample_evaluation_data to train the network, it will result in inflated scores, and you will not be able to determine how your network will actually perform when evaluated to determine your grade.
 
 ## Experimentation: Testing in Simulation
-1. Copy your saved model to the weights directory `data/weights`.
-2. Launch the simulator, select "Spawn People", and then click the "Follow Me" button.
-3. Run the realtime follower script
+
+1. Launch the simulator, select "Spawn People", and then click the "Follow Me" button.
+2. Run the realtime follower script
 ```
-$ python follower.py my_amazing_model.h5
+$ python follower.py model_weights.h5
 ```
 
 **Note:** If you'd like to see an overlay of the detected region on each camera frame from the drone, simply pass the `--pred_viz` parameter to `follower.py`
@@ -398,4 +384,4 @@ $ python follower.py my_amazing_model.h5
 ## Enhancements
 * More data images can be added to the training to improve the learning and descrease ofer fitting
 * The performance of the FCN can still can improve by add more layers and larger filter sizes.
-* For the training to me faster, we can add more GPUs
+* For the training to be faster, we can add more GPUs
