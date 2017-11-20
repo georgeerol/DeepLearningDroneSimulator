@@ -171,7 +171,7 @@ workers = 2
 * validation_steps: number of batches of validation images that go through the network in 1 epoch. This is similar to steps_per_epoch, except validation_steps is for the validation dataset. This value is set to 50.
 * workers: maximum number of processes to spin up. This can affect your training speed and is dependent on your hardware. This value is set to 2.
 
-With 2 NVDIA GTX 1070 with 8GB RAM and the hyperparameters settings above, it took almost 3 hours to train the model.
+With 2 NVDIA GTX 1070 and the hyperparameters settings above, it took almost 3 hours to train the model.
 
 **Note**: See the model_training Jupyter Notebook located in the [code folder](./code) or the html page located in the
 [html folder](./html) for more information about the implementation of the segmentation network.
