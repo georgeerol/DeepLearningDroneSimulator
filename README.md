@@ -29,44 +29,6 @@ If the data is a bit more complicated  then we'll need a more complicated algori
 
 ![Complicated Data Points](./misc/ComplicatedDataPoints.JPG)
 
-## Setup Instructions
-### Prerequisites
-Python 3.5 and Jupyter Notebooks is needed for this project.  The best way to get setup with these is to use Anaconda, the [RoboND-Python-Starterkit](https://github.com/ryan-keenan/RoboND-Python-Starterkit) and use [PyCharm IDE](https://www.jetbrains.com/pycharm/) for coding and debugging.
-Here is a great link for learning more about [Anaconda and Jupyter Notebooks](https://classroom.udacity.com/courses/ud1111)
-
-Note: if you have a recent version of the RoboND environment then these packages should already be installed.
-
-#### OS X and Linux (Ubuntu)source activate RoboND
-pip install tensorflow==1.2.1
-pip install socketIO-client
-pip install transforms3d
-pip install PyQt5
-pip install pyqtgraph
-
-#### Windows source activate RoboND 
-if the above throws an error, you can run "activate RoboND" instead
-* pip install tensorflow==1.2.1
-* pip install socketIO-client
-* pip install transforms3d
-* pip install PyQt5
-* pip install pyqtgraph
-
-### Download the data
-
-Save the following three files into the data folder of the cloned repository. 
-
-[Training Data](https://s3-us-west-1.amazonaws.com/udacity-robotics/Deep+Learning+Data/Lab/train.zip) 
-
-[Validation Data](https://s3-us-west-1.amazonaws.com/udacity-robotics/Deep+Learning+Data/Lab/validation.zip)
-
-[Sample Evaluation Data](https://s3-us-west-1.amazonaws.com/udacity-robotics/Deep+Learning+Data/Project/sample_evaluation_data.zip)
-
-### Download the QuadSim binary
-
-To interface your neural net with the QuadSim simulator, you must use a version QuadSim that has been custom tailored for this project. The previous version that you might have used for the Controls lab will not work.
-
-The simulator binary can be downloaded [here](https://github.com/udacity/RoboND-DeepLearning/releases/latest)
-
 ## Implement the Segmentation Network
 
 ### Semantic Segmentation
@@ -195,6 +157,49 @@ def decoder_block(small_ip_layer, large_ip_layer, filters):
     output_layer = separable_conv2d_batchnorm(output_layer,filters,1)
     return output_layer
 ```
+
+
+**Note**: See the model_training Jupyter Notebook located in the [code folder](./code) or the html page located in the
+[html folder](./html) for more information about the implementation of the Segmentation Network.
+
+
+## Setup Instructions
+### Prerequisites
+Python 3.5 and Jupyter Notebooks is needed for this project.  The best way to get setup with these is to use Anaconda, the [RoboND-Python-Starterkit](https://github.com/ryan-keenan/RoboND-Python-Starterkit) and use [PyCharm IDE](https://www.jetbrains.com/pycharm/) for coding and debugging.
+Here is a great link for learning more about [Anaconda and Jupyter Notebooks](https://classroom.udacity.com/courses/ud1111)
+
+Note: if you have a recent version of the RoboND environment then these packages should already be installed.
+
+#### OS X and Linux (Ubuntu)source activate RoboND
+pip install tensorflow==1.2.1
+pip install socketIO-client
+pip install transforms3d
+pip install PyQt5
+pip install pyqtgraph
+
+#### Windows source activate RoboND
+if the above throws an error, you can run "activate RoboND" instead
+* pip install tensorflow==1.2.1
+* pip install socketIO-client
+* pip install transforms3d
+* pip install PyQt5
+* pip install pyqtgraph
+
+### Download the data
+
+Save the following three files into the data folder of the cloned repository.
+
+[Training Data](https://s3-us-west-1.amazonaws.com/udacity-robotics/Deep+Learning+Data/Lab/train.zip)
+
+[Validation Data](https://s3-us-west-1.amazonaws.com/udacity-robotics/Deep+Learning+Data/Lab/validation.zip)
+
+[Sample Evaluation Data](https://s3-us-west-1.amazonaws.com/udacity-robotics/Deep+Learning+Data/Project/sample_evaluation_data.zip)
+
+### Download the QuadSim binary
+
+To interface your neural net with the QuadSim simulator, you must use a version QuadSim that has been custom tailored for this project. The previous version that you might have used for the Controls lab will not work.
+
+The simulator binary can be downloaded [here](https://github.com/udacity/RoboND-DeepLearning/releases/latest)
 
 ## Data Collection
 Good data is just as important as a good network architecture therefore collecting the best data is the key to success
