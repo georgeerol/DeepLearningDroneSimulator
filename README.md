@@ -356,20 +356,12 @@ We determine whether the target is actually in the image by whether there are mo
 
 Using the above the number of detection true_positives, false positives, false negatives are counted. 
 
-**Note**: See the model_training Jupyter Notebook located in the [code folder](./code) or the html page located in the
-[html folder](./html) for more information and to see the Score.
-
 **How the Final score is Calculated**
 
 The final score is the pixelwise `average_IoU*(n_true_positive/(n_true_positive+n_false_positive+n_false_negative))` on data similar to that provided in sample_evaulation_data
 
-**Ideas for Improving your Score**
-
-Collect more data from the sim. Look at the predictions think about what the network is getting wrong, then collect data to counteract this. Or improve your network architecture and hyperparameters. 
-
-**Obtaining a Leaderboard Score**
-
-Share your scores in slack, and keep a tally in a pinned message. Scores should be computed on the sample_evaluation_data. This is for fun, your grade will be determined on unreleased data. If you use the sample_evaluation_data to train the network, it will result in inflated scores, and you will not be able to determine how your network will actually perform when evaluated to determine your grade.
+**Note**: See the model_training Jupyter Notebook located in the [code folder](./code) or the html page located in the
+[html folder](./html) for more information and to see the Score.
 
 ## Experimentation: Testing in Simulation
 
