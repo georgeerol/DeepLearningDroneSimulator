@@ -1,43 +1,42 @@
-
 ## Deep Learning Drone Simulator ##
 [image_0]: ./misc/FollowMeGif.gif
 ![alt text][image_0] 
 
 This [Udacity clone project](https://github.com/udacity/RoboND-DeepLearning.git)  is to  learn  how to build a neural network
- and how all the individual pieces function together to form a powerful decision-making  drone machine.
+ and how all the individual pieces function together to form a powerful decision-making drone machine.
 
-**TensorFlow**  which  is a powerful software framework developed by Google to facilitate building deep neural networks is 
-used to abstract away many of the  finer details and make life easier are used in this project. However it is important 
-to have a firm grasp of the fundamentals to understand  the choices needed to make in setting various parameters or 
+**TensorFlow**  which is a robust software framework developed by Google to facilitate building deep neural networks is 
+used to abstract away many of the finer details and make life easier are used in this project. However, it is important 
+to have a firm grasp of the fundamentals to understand the choices needed to make in setting various parameters or 
 how to improve the performance of the neural network.
 
 
 ### What is Deep learning and what it is used for?
 The heart of deep learning has to do with something call Neural Networks. Neural networks vaguely mimic the process of 
-how the brain operates with neurons  that fire bits of information. 
+how the brain operates with neurons that fire bits of information. 
 For example,There's a child playing in the sand with some read an blue shells and we ask the child.
- Can you draw a line that separates the red and the blue shells? And the child will draws a line. 
+ Can you draw a line that separates the red and the blue shells? And the child will draw a line. 
 
 ![Child Draw line](./misc/ChildDrawLine.JPG)
  
- That's it. That's what a neural networks does. Given some data in the form of blue or red points, the neural network will look for the best line that separates them.
-  And if the data is a bit more complicated  then we'll need a more complicated algorithm. Here, a deep neural network will do the job and find the more complex boundary that separates the points.
+ That's it. That's what a neural network does. Given some data in the form of blue or red points, the neural network will look for the best line that separates them.
+  And if the data is a bit more complicated then we'll need a more complicated algorithm. Here, a deep neural network will do the job and find the more complex boundary that separates the points.
 
 ![Simple Data Points](./misc/SimpleDataPoints.JPG)
 
-If the data is a bit more complicated  then we'll need a more complicated algorithm. Here, a deep neural network will do the job and find the more complex boundary that separates the points.
+If the data is a bit more complicated,  then we'll need a more complicated algorithm. Here, a deep neural network will do the job and find the more complex boundary that separates the points.
 
 ![Complicated Data Points](./misc/ComplicatedDataPoints.JPG)
 
 ## Implement the Segmentation Network
 
 ### Semantic Segmentation
-Semantic Segmentation is the task of assigning meaning to part of an object.
+Semantic Segmentation is the task of assigning meaning to a part of an object.
 This can be done at the pixel level where we assign each pixel to a
 target class such as road, car, pedestrian, sign, or any number
-of other classes. Semantic segmentation help us derive valuable information
+of other classes. Semantic segmentation helps us derive valuable information
 about every pixel in the image rather than just slicing sections into bounding boxes.
-This is a filed known as scene understanding and it's particularly relevant to autonomous vehicle.
+This is a filed known as scene understanding, and it's mainly relevant to autonomous vehicle.
 Full scene understanding help with perception, which enables vehicles to make decisions.
 
  ![Semantic Segmentation](./misc/SemanticSegmentation.png)
@@ -45,21 +44,21 @@ Full scene understanding help with perception, which enables vehicles to make de
 
 ### Bounding Boxes
 They are a simple method of scene understanding compared to segmentation.
-In neural  network, just has to figure out where an object is and draw a type box around it.
-There are already great open source state of the art solution, such as YOLO and SSD models.
-These models perform extremely well event at high frame per second.
-They're useful for detecting different object such as cars, people, traffic lights, and other objects in the scene.
+In neural network, just has to figure out where an object is and draw a type box around it.
+There are already significant open source state of the art solution, such as YOLO and SSD models.
+These models perform extremely well even at a high frame per second.
+They're useful for detecting different objects such as cars, people, traffic lights, and other objects in the scene.
 
  ![Semantic Segmentation](./misc/BoundingBoxesWorking.png)
 However, burning boxes have their limits. Imagine drawing and bounding
-box around a curvy road, the forest, or the sky, this quickly becomes problematic
+box around a curvy road, the forest, or the sky; this quickly becomes problematic
  or even impossible to convey the true shape of an object. At best, bounding boxes
- can only hope to  achieve partial seen understanding which is why we use Semantic Segmentation in this project.
+ can only hope to achieve partial seen understanding which is why we use Semantic Segmentation in this project.
 
   ![Semantic Segmentation](./misc/BoundingBoxesNotWorking.png)
 
-A fully convolution network(FCN) is used to train the Semantic Segmentation model.
- It contains 3 encoder blocks, a 1x1 convolution layer, and 3 symmetrical decoder blocks.
+A full convolution network(FCN) is used to train the Semantic Segmentation model.
+ It contains three encoder blocks, a 1x1 convolution layer, and three symmetrical decoder blocks.
 
 
  ###### Fully Convolutional network code snippet
@@ -90,14 +89,14 @@ def fcn_model(inputs, num_classes):
 ### What is a Fully Convolutional Network?
 
 A typical convolutional neural network might consist of a series of convolution layers.
-Followed by  fully connected layers and ultimately a soft max activation function.
-It s a great architecture for a classification task like  this a picture of a hotdog ?
+Followed by fully connected layers and ultimately a softmax activation function.
+It's a great architecture for a classification task like this a picture of a hotdog?
 
   ![Semantic Segmentation](./misc/ConvolutionalNeuralNetwork.png)
 
 But what if we want to change our task ever so slighty. We want to answer
-the question, where in this pictute is the hotdog?The question is much more
-difficult to answer since fully connected layers don't preserve spatial information.
+the question, where in this picture is the hotdog?The question is much more
+difficult to solve since fully connected layers don't preserve spatial information.
 However if, we change the  C from connected to convolutional, we can
 integrate convolutions directly into the layer to create fully convolutional network.
 It help us answer where is the hotdog question because while doing the
@@ -110,12 +109,12 @@ a fully convolutional network will work on images of any size.
 
 Fully Convolutional Networks have  achieved state of the art results in
 computer vision tasks such as Semantic Segmentation.
-FCNs take advantage of 3 special techniques
+FCNs take advantage of 3 special techniques:
 
 1. Replace fully connected layers with 1x1 convolutional layers
 2. Up-sampling through the use of transposed convolutional layers
-2. Skip Connection - These skip connection allow the network to  use
-information from multiple resolution scales. As a result the network is able to make more precise segmentation decisions.
+2. Skip Connection - These skip connection allow the network to use
+information from multiple resolution scales. As a result, the network is able to make more precise segmentation decisions.
 
 #### No Skip Connection
 ![No Skip Connection](./misc/NoSkipConnection.png)
@@ -167,7 +166,7 @@ workers = 2
 ```
 
 * learning_rate: Started at 0.01 and the network had no problem with that value
-* batch_size: is  the number of training samples/images that get propagated through the network in a single pass. It is set to 15 because one of the 2 Nvidia GTX 1070 kept crashing because of low memory
+* batch_size: is the number of training samples/images that get propagated through the network in a single pass. It is set to 15 because one of the 2 Nvidia GTX 1070 kept crashing because of low memory
 * num_epochs: number of times the entire training dataset gets propagated through the network. This value is set to 60.
 * steps_per_epoch: number of batches of training images that go through the network in 1 epoch.This value is set to 200.
 * validation_steps: number of batches of validation images that go through the network in 1 epoch. This is similar to steps_per_epoch, except validation_steps is for the validation dataset. This value is set to 50.
@@ -225,7 +224,7 @@ Open quad sim, put a check mark in **_Spawn crowd_**, then click on **_DL traini
 
 ### Local control mode
 The quad will start out in patrol mode, but since we have not added any waypoints yet, it will have nowhere to go.
- To add waypoints we must first switch to local local control by pressing the H key.
+ To add waypoints we must first switch to local control by pressing the H key.
  ![Quad Start](./misc/QuadStart.png)
  
 ### View and Navigation
@@ -240,11 +239,11 @@ To look up these and other commands press the **_L_** legend key
  ![Quad View Adjust](./misc/QuadViewAdjust.png)
  
  ### Managing data collection
-There are 3 major aspects to the data collection process that you can control in order determine the type of data you collect. These are as follows:
+There are three major aspects to the data collection process that you can control in order determine the type of data you collect. These are as follows:
 
 1. The path the quad will take while on patrol.
 2. The path the hero will walk.
-3. The locations of distractor spawns.
+3. The locations of distractor spawn.
 
 ### Setting Patrol Points
 Press the **_P_** key to set a patrol point. A green patrol point will appear at the quads position.
@@ -281,14 +280,14 @@ For setting spawn and hero path points it is helpful to rotate the camera so you
    ![Overhead view](./misc/OverheadView.png)
    
 To start let's create a small collection experiment. Often it will be the case that we will want to run multiple collection
- runs and have each run target a specific type of data. It will also be necessary to have a large sample of data containing the hero. 
+ runs and have each run target a specific type of data. It will also be necessary to have a significant sample of data containing the hero. 
 If we create a very large patrol path and hero path it will be unlikely that we will collect many images containing the hero.
 
    ![Run Setup](./misc/RunSetup.png)
    
 
 ### Starting the Collection Run
-When we are satisfied with how we have placed the the patrol path, hero path, and spawn points, press M to have people
+When we are satisfied with how we have placed the patrol path, hero path, and spawn points, press M to have people
  start spawning.
  
   ![Start run spawns](./misc/StartRunSpawns.png)
