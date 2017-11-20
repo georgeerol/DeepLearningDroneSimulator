@@ -44,7 +44,7 @@ pip install PyQt5
 pip install pyqtgraph
 
 #### Windows source activate RoboND 
-# if the above throws an error, you can run "activate RoboND" instead
+if the above throws an error, you can run "activate RoboND" instead
 * pip install tensorflow==1.2.1
 * pip install socketIO-client
 * pip install transforms3d
@@ -126,7 +126,93 @@ Rename or move `data/train`, and `data/validation`, then move `data/processed_im
 
 Merging multiple `train` or `validation` may be difficult, it is recommended that data choices be determined by what you include in `raw_sim_data/train/run1` with possibly many different runs in the directory. You can create a tempory folder in `data/` and store raw run data you don't currently want to use, but that may be useful for later. Choose which `run_x` folders to include in `raw_sim_data/train`, and `raw_sim_data/validation`, then run  `preprocess_ims.py` from within the 'code/' directory to generate your new training and validation sets. 
 
+## Data Collection Guide
+Good data is just as important as a good network architecture therefore collecting the best data is the key to success
 
+Open quad sim, put a check mark in **_Spawn crowd_**, then click on **_DL training_**
+![QuandSim Front Page](./misc/QuadSimFrontPage.png)
+
+### Local control mode
+The quad will start out in patrol mode, but since we have not added any waypoints yet, it will have nowhere to go.
+ To add waypoints we must first switch to local local control by pressing the H key.
+ ![Quad Start](./misc/QuadStart.png)
+ 
+### View and Navigation
+* To zoom out from the quad, we recommend using the **_mouse wheel_**.
+* To change the viewing perspective at any time during training, **_right click_** on the screen and move the mouse.
+* Use **_WASD_** keys to move the quad forward, left, back and right
+* Use **_<space>_** and **_C_** to thrust up and down
+* Use **_QE_** keys to turn the quad toward the left or right
+* Press **_G_** to reset it to the starting pose.
+To look up these and other commands press the **_L_** legend key
+
+ ![Quad View Adjust](./misc/QuadViewAdjust.png)
+ 
+ ### Managing data collection
+There are 3 major aspects to the data collection process that you can control in order determine the type of data you collect. These are as follows:
+
+1. The path the quad will take while on patrol.
+2. The path the hero will walk.
+3. The locations of distractor spawns.
+
+### Setting Patrol Points
+Press the **_P_** key to set a patrol point. A green patrol point will appear at the quads position.
+ ![Patrol Point 1](./misc/PatrolPoints1.png)
+ 
+ Move to another position and press P again to add one more patrol point somewhere nearby.
+ 
+  ![Patrol Point 3](./misc/PatrolPoints3.png)
+  
+ We can now put the quad into patrol mode by pressing **_H_**. To switch back to local control press H again.
+ To remove all the patrol points you have set press **_L_**
+   ![Patrol Points Removed](./misc/PatrolPointsRemoved.png)
+ 
+### Setting the Hero (Person that the Drone will be following)
+To set a hero path point press **_O_** while in local control mode. The hero path points are very similar to the patrol points,
+ except they are always placed at ground level. Decrease the quads altitude by pressing **_C_** to get a better look at 
+ the points you are setting. Similar to patrol points, all the hero path points can be removed by pressing **_K_**. 
+ The hero will start at the first point you create and walk around the path. When reaching the end, 
+the hero will despawn before reappearing at the beginning of the path.
+
+   ![Hero Path](./misc/HeroPath.png)
+   
+### Setting Spawn points
+All the characters in the sim except the hero will respawn after 30-50 seconds at one of the spawn points. 
+We can control the number of people in a given area by the number and location of the spawn points we place. 
+We can set a spawn point at the quads current x,y position by pressing the **_I_** key. 
+Blue markers will appear at the spawn locations. We can remove all the spawn points by pressing **_J_**
+
+   ![Spawn points](./misc/SpawnPoints.png)
+
+### Setting up a Data collection Run
+For setting spawn and hero path points it is helpful to rotate the camera so you are viewing the quad from directly above.
+
+   ![Overhead view](./misc/OverheadView.png)
+   
+To start let's create a small collection experiment. Often it will be the case that we will want to run multiple collection
+ runs and have each run target a specific type of data. It will also be necessary to have a large sample of data containing the hero. 
+If we create a very large patrol path and hero path it will be unlikely that we will collect many images containing the hero.
+
+   ![Run Setup](./misc/RunSetup.png)
+   
+
+### Starting the Collection Run
+When we are satisfied with how we have placed the the patrol path, hero path, and spawn points, press M to have people
+ start spawning.
+ 
+  ![Start run spawns](./misc/StartRunSpawns.png)
+ 
+ To start recording data press the **_R_** key. Navigate to the **raw_sim_data/train/target** We are using the target directory
+  because we have elected to have the hero appear in this collection run. Alternatively randomly chosen people can take the role of the hero.
+ In this in order to have the data preparation turn out correctly we would select the **non_target folder**.
+ 
+ Press **_H_** to have the quad enter patrol mode. To speed up the data collection process, press the **_9_** key. 
+ Data from this run will be stored in the folder selected.
+When we are done collecting data, we can press **_R_** again to stop recording. While it is not advisable to add/remove
+ the hero path/spawn points while the data collection is running, we can delete the patrol path and modify it if desired.
+
+To reset the sim, press **_<Esc>_**
+ 
 ## Training, Predicting and Scoring ##
 With your training and validation data having been generated or downloaded from the above section of this repository, you are free to begin working with the neural net.
 
