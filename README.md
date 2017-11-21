@@ -137,7 +137,7 @@ def encoder_block(input_layer, filters, strides):
     output_layer = separable_conv2d_batchnorm(input_layer, filters, strides)
     return output_layer
 ```
- One separable convolution layer is used for each Encoder. The encoding layers uses convo
+One separable convolution layer is used for each Encoder. The encoding layers use convolution to help it find objects in a image regardless of where the object is located.
 
 ###### Decoder code snippet
 ```python
@@ -152,7 +152,7 @@ def decoder_block(small_ip_layer, large_ip_layer, filters):
     output_layer = separable_conv2d_batchnorm(output_layer,filters,1)
     return output_layer
 ```
-One bilinear upsampling layer, a layer concatenation step, and one separable convolution layers is used for each decoder.
+One bilinear upsampling layer, a layer concatenation step, and one separable convolution layers is used for each decoder.The decoder layers heps to find the location of each identified objects, down to the pixel level.
 
 
 
