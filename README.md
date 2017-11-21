@@ -1,5 +1,5 @@
 ## Deep Learning Drone Simulator ##
-[image_0]: ./misc/FollowMeGif.gif
+[image_0]: ./docs/misc/sim_screenshot.png
 ![alt text][image_0] 
 
 This [Udacity clone project](https://github.com/udacity/RoboND-DeepLearning.git)  is to  learn  how to build a neural network
@@ -18,4 +18,5 @@ how to improve the performance of the neural network.
 5. [**Results and Limitations**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/5.-Results-and-Limitations) 
 6. [**Testing in Simulation**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/6.-Testing-in-Simulation)
 
-   
+[image_1]: ./misc/FollowMeGif.gif
+![alt text][image_1] 
