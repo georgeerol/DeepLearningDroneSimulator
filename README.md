@@ -90,7 +90,7 @@ def fcn_model(inputs, num_classes):
 
 A typical convolutional neural network might consist of a series of convolution layers.
 Followed by fully connected layers and ultimately a softmax activation function.
-It's a great architecture for a classification task/ For example is this a picture of a hotdog?
+It's a great architecture for a classification task.For example, is this a picture of a hotdog?
 
   ![Semantic Segmentation](./misc/ConvolutionalNeuralNetwork.png)
 
