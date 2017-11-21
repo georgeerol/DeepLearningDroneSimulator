@@ -86,7 +86,7 @@ def fcn_model(inputs, num_classes):
 
 ```
 
-### What is a Fully Convolutional Network?
+### A 1x1 Convolution Layer vs Fully Connected Layer?
 
 A typical convolutional neural network might consist of a series of convolution layers.
 Followed by fully connected layers and ultimately a softmax activation function.
