@@ -106,7 +106,7 @@ a fully convolutional network will work on images of any size.
 
 ![Semantic Segmentation](./misc/FullyConvolutionalNetwork.png)
 
-Fully Convolutional Networks have  achieved state of the art results in
+Fully Convolutional Networks have achieved state of the art results in
 computer vision tasks such as semantic segmentation.
 FCNs take advantage of 3 special techniques:
 
@@ -121,10 +121,10 @@ information from multiple resolution scales. As a result, the network is able to
 #### Skip Connection
 ![Skip Connection](./misc/SkipConnection.png)
 
-### Structurally a FNC
+### Encoder and Decoder
 Structurally a FCN is usually comprised of two parts: encoder and decoder.
 * The encoder is a series of convolutional layers like **VGG** and **ResNet**.
-The goal of the encoder is to extract features from the image.
+The goal of the encoder is to extract features from the image. 
 * The decoder up-scale the output of the encoder such that it's the same
 size as the original image. Thus, it results in segmentation or prediction
 of each individual pixel in the original image.
@@ -137,7 +137,7 @@ def encoder_block(input_layer, filters, strides):
     output_layer = separable_conv2d_batchnorm(input_layer, filters, strides)
     return output_layer
 ```
-
+ One separable convolution layer is used for each Encoder. The encoding layers uses convo
 
 ###### Decoder code snippet
 ```python
@@ -152,6 +152,9 @@ def decoder_block(small_ip_layer, large_ip_layer, filters):
     output_layer = separable_conv2d_batchnorm(output_layer,filters,1)
     return output_layer
 ```
+One bilinear upsampling layer, a layer concatenation step, and one separable convolution layers is used for each decoder.
+
+
 
 ### Hyperparameters
 The Hyperparameters use in this project is:
@@ -372,6 +375,9 @@ $ python follower.py model_weights.h5
 ```
 
 **Note:** If you'd like to see an overlay of the detected region on each camera frame from the drone, simply pass the `--pred_viz` parameter to `follower.py`
+
+## Limitations
+In this project, the hero is very different from her surrounding which makes the training of the Fully Convolution Network very easy. She has red haird and a red shirt and the surrounding doesn't have any red.The training model may  not be as good if the object is a dog, car,etc because these object are not distuncly different from the surroundings. More training data and a more complex Fully Convolution Network will be needed for real life scenarios.
 
 ## Enhancements
 * More data images can be added to the training to improve the learning and descrease over fitting
