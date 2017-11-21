@@ -374,6 +374,6 @@ $ python follower.py model_weights.h5
 **Note:** If you'd like to see an overlay of the detected region on each camera frame from the drone, simply pass the `--pred_viz` parameter to `follower.py`
 
 ## Enhancements
-* More data images can be added to the training to improve the learning and descrease ofer fitting
+* More data images can be added to the training to improve the learning and descrease over fitting
 * The performance of the FCN can still can improve by add more layers and larger filter sizes.
 * For the training to be faster, we can add more GPUs
