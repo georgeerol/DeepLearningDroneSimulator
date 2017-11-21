@@ -122,7 +122,7 @@ information from multiple resolution scales. As a result, the network is able to
 ![Skip Connection](./misc/SkipConnection.png)
 
 ### Structurally a FNC
-Structurally an FCN is usually comprised of two parts: encoder and decoder.
+Structurally a FCN is usually comprised of two parts: encoder and decoder.
 * The encoder is a series of convolutional layers like **VGG** and **ResNet**.
 The goal of the encoder is to extract features from the image.
 * The decoder up-scale the output of the encoder such that it's the same
