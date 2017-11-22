@@ -12,10 +12,10 @@ how to improve the performance of the neural network.
 
 ## Wiki Contents
 1. [**What is Deep Learning?**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/1.-What-is-Deep-Learning%3F)
-2. [**Segmentation Network Implementation**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/2.-The-Segmentation-Network)
+2. [**Segmentation Network Implementation and Architecture**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/2.-The-Segmentation-Network)
 3. [**Setup Instructions**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/3.-Setup-Instructions)
 4. [**Data Collection**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/4-.-Data-Collection)
-5. [**Results and Limitations**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/5.-Results-and-Limitations) 
+5. [**ResultsLimitations and Future Enhancements**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/5.-Results-and-Limitations) 
 6. [**Testing in Simulation**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/6.-Testing-in-Simulation)
 
 [image_1]: ./misc/FollowMeGif.gif
