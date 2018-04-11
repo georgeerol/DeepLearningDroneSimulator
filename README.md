@@ -10,7 +10,7 @@ used to abstract away many of the finer details and make life easier are used in
 to have a firm grasp of the fundamentals to understand the choices needed to make in setting various parameters or 
 how to improve the performance of the neural network.
 
-## Wiki Contents
+## Wiki Content
 1. [**What is Deep Learning?**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/1.-What-is-Deep-Learning%3F)
 2. [**Segmentation Network Implementation and Architecture**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/2.-The-Segmentation-Network-and-Architecture)
 3. [**Setup Instructions**](https://github.com/fouliex/DeepLearningDroneSimulator/wiki/3.-Setup-Instructions)
